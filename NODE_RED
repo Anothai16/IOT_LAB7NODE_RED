@@ -1,0 +1,14 @@
+let incomingMessage = msg.payload; // รับข้อความที่เข้ามา
+
+let city = msg.payload.address.city;
+let name = msg.payload.firstName;
+
+// ถ้า payload เป็นอ็อบเจ็กต์ ให้ดึงค่าที่ต้องการ
+if (typeof incomingMessage === 'object') {
+    incomingMessage = incomingMessage.message || "Unknown"; // หรือใช้ค่าที่เหมาะสม
+}
+
+
+let jsonResponse = { message: "Hello " + name + " from " + city }; // สร้างอ็อบเจ็กต์ JSON
+msg.payload = JSON.stringify(jsonResponse); // แปลงเป็น JSON string
+return msg; // ส่งกลับข้อความที่ปรับปรุงแล้ว
